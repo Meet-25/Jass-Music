@@ -29,7 +29,7 @@ public class first_page extends AppCompatActivity {
 //            startActivity(intent);
 //        }
 
-//test
+
 
         bnview=findViewById(R.id.bnview);
 
