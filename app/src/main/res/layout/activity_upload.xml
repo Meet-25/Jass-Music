@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".upload_activity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <EditText
+        android:id="@+id/song_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:hint="enter song name"
+        android:paddingTop="40dp"
+        android:textColor="@color/material_dynamic_neutral20"
+        android:textColorHint="@color/material_dynamic_neutral50"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/no_song_selected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="70dp"
+        android:paddingTop="40dp"
+        android:gravity="center"
+        android:hint="no song selected"
+        android:textColorHint="@color/material_dynamic_neutral50"
+        android:textColor="@color/material_dynamic_neutral20"
+        android:textSize="20sp" />
+    <ImageView
+        android:id="@+id/upload_image"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="10dp"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/Select_image"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="select image"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="5dp"
+            />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/Select_song"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="select song"
+        android:layout_marginEnd="10dp"
+        />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/upload_song"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="upload song"
+            android:layout_marginEnd="5dp"/>
+
+
+    </LinearLayout>
+</LinearLayout>

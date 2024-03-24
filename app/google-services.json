@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "833514568357",
+    "project_id": "jass-music",
+    "storage_bucket": "jass-music.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833514568357:android:ce3e6f7ad9c51ee09d6b4c",
+        "android_client_info": {
+          "package_name": "com.example.android.jassmusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833514568357-q1sr166hvfhuupn9aklhtli8hb320cpb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo-fJxzknwAGcI6O4w-7_j9273aEbiz-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833514568357-q1sr166hvfhuupn9aklhtli8hb320cpb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
