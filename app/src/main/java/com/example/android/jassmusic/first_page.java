@@ -28,7 +28,7 @@ public class first_page extends AppCompatActivity {
 //            Intent intent=new Intent(getApplicationContext(),person_Fragment.class);
 //            startActivity(intent);
 //        }
-
+//hi
         bnview=findViewById(R.id.bnview);
 
         bnview.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
