@@ -111,7 +111,6 @@ public class favourite_Fragment extends androidx.fragment.app.Fragment {
         databaseReference=firebaseDatabase.getReference("songs");
 
 
-
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -153,28 +152,6 @@ public class favourite_Fragment extends androidx.fragment.app.Fragment {
                 Toast.makeText(getContext(),"failed to access data",Toast.LENGTH_LONG).show();
             }
         });
-
-
-
-        arrayList.add(new dataModel(0, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(1, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(2, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(3, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(4, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(5, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(6, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(7, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(8, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(9, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(10, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(11, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(12, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(13, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(14, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(15, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-        arrayList.add(new dataModel(16, R.drawable.blindinglights, "Jazz Music", R.raw.i_was_never_there));
-        arrayList.add(new dataModel(17, R.drawable.jassimage, "Jazz Music", R.raw.summertime_sadness));
-
 
 
         return view;
