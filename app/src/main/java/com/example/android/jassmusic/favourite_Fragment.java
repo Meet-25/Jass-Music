@@ -103,7 +103,7 @@ public class favourite_Fragment extends androidx.fragment.app.Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_favourite_, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerViewrecent);
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
@@ -111,47 +111,47 @@ public class favourite_Fragment extends androidx.fragment.app.Fragment {
         databaseReference=firebaseDatabase.getReference("songs");
 
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()){
-                    dataModel dataModelobj=ds.getValue(dataModel.class);
-                    arrayList.add(dataModelobj);
-                    System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
-                    Log.e("Music position", "song url: " + dataModelobj.getSongurl());
-                    Log.e("Music position", "song url: " + dataModelobj.getImg());
-                    Log.e("Music position", "array list: " + arrayList.get(0));
-                }
-                RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(),arrayList, new CustomItemClickListener() {
-                    @Override
-                    public void onItemClick(View v, int position) {
-
-                        if (position >= 0 && position < arrayList.size()) {
-
-                            String image=arrayList.get(position).getImg();
-                            String songurl=arrayList.get(position).getSongurl();
-
-
-                            Intent intent=new Intent(getContext(),music_playing_Activity.class);
-                            intent.putExtra("songs",arrayList);
-                            intent.putExtra("music",songurl);
-                            intent.putExtra("image",image);
-                            intent.putExtra("pos",position);
-                            Objects.requireNonNull(getContext()).startActivity(intent);
-
-                        }
-
-                    }
-                });
-
-                recyclerView.setAdapter(recyclerViewAdapter2);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(getContext(),"failed to access data",Toast.LENGTH_LONG).show();
-            }
-        });
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot ds : snapshot.getChildren()){
+//                    dataModel dataModelobj=ds.getValue(dataModel.class);
+//                    arrayList.add(dataModelobj);
+//                    System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+//                    Log.e("Music position", "song url: " + dataModelobj.getSongurl());
+//                    Log.e("Music position", "song url: " + dataModelobj.getImg());
+//                    Log.e("Music position", "array list: " + arrayList.get(0));
+//                }
+//                RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(),arrayList, new CustomItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View v, int position) {
+//
+//                        if (position >= 0 && position < arrayList.size()) {
+//
+//                            String image=arrayList.get(position).getImg();
+//                            String songurl=arrayList.get(position).getSongurl();
+//
+//
+//                            Intent intent=new Intent(getContext(),music_playing_Activity.class);
+//                            intent.putExtra("songs",arrayList);
+//                            intent.putExtra("music",songurl);
+//                            intent.putExtra("image",image);
+//                            intent.putExtra("pos",position);
+//                            Objects.requireNonNull(getContext()).startActivity(intent);
+//
+//                        }
+//
+//                    }
+//                });
+//
+//                recyclerView.setAdapter(recyclerViewAdapter2);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//                Toast.makeText(getContext(),"failed to access data",Toast.LENGTH_LONG).show();
+//            }
+//        });
 
 
         return view;

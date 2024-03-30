@@ -1,20 +1,29 @@
 package com.example.android.jassmusic;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.MediaController;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class home_Fragment extends Fragment {
 
@@ -25,11 +34,12 @@ public class home_Fragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    ArrayList<dataModel> arrayList1;
-
+    ArrayList<dataModel> arrayList;
     ArrayList<dataModel> arrayList2;
     ArrayList<dataModel> arrayList3;
     RecyclerView recyclerView;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     RecyclerViewAdapter recyclerViewAdapter;
     MediaPlayer mediaPlayer;
     ValueEventListener valueEventListener;
@@ -61,46 +71,61 @@ public class home_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        arrayList = new ArrayList<>();
+        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home_, container, false);
+
         recyclerView = view.findViewById(R.id.recyclerView2);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        int index=0;
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
+        firebaseDatabase= FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("songs");
 
 
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()){
+                    dataModel dataModelobj=ds.getValue(dataModel.class);
+                    arrayList.add(dataModelobj);
+                    System.out.println("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
+                    Log.e("Music position", "song url: " + dataModelobj.getSongurl());
+                    Log.e("Music position", "song url: " + dataModelobj.getImg());
+                    Log.e("Music position", "array list: " + arrayList.get(0));
+                }
+                RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(),arrayList, new CustomItemClickListener() {
+                    @Override
+                    public void onItemClick(View v, int position) {
 
-        arrayList1 = new ArrayList<>();
-        arrayList1.add(new dataModel(0,R.drawable.jassimage, "Jazz music",R.raw.jazzgirl));
-        arrayList1.add(new dataModel(1,R.drawable.blindinglights, "Jazz music",R.raw.i_was_never_there));
-        arrayList1.add(new dataModel(2,R.drawable.jassimage, "Jazz music",R.raw.jazzgirl));
-        arrayList1.add(new dataModel(3,R.drawable.blindinglights, "Jazz music",R.raw.i_was_never_there));
-        arrayList1.add(new dataModel(4,R.drawable.jassimage, "Jazz music",R.raw.jazzgirl));
-        arrayList1.add(new dataModel(5,R.drawable.blindinglights, "Jazz music",R.raw.i_was_never_there));
-        recyclerView.setAdapter(new RecyclerViewAdapter(arrayList1));
+                        if (position >= 0 && position < arrayList.size()) {
 
-        recyclerView = view.findViewById(R.id.recyclerview3);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        arrayList2 = new ArrayList<>();
-        arrayList2.add(new dataModel(6,R.drawable.blindinglights, "Jazz music",R.raw.i_was_never_there));
-        arrayList2.add(new dataModel(7,R.drawable.jassimage, "Jazz music",R.raw.jazzgirl));
-        arrayList2.add(new dataModel(8,R.drawable.jassimage, "Jazz music",R.raw.i_was_never_there));
-        arrayList2.add(new dataModel(9,R.drawable.jassimage, "Jazz music",R.raw.jazzgirl));
-        arrayList2.add(new dataModel(10,R.drawable.jassimage, "Jazz music",R.raw.i_was_never_there));
-        arrayList2.add(new dataModel(11,R.drawable.jassimage, "Jazz music",R.raw.jazzgirl));
-        recyclerView.setAdapter(new RecyclerViewAdapter(arrayList2));
+                            String image=arrayList.get(position).getImg();
+                            String songurl=arrayList.get(position).getSongurl();
 
 
-        recyclerView = view.findViewById(R.id.recyclerview4);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        arrayList3 = new ArrayList<>();
-        arrayList3.add(new dataModel(12,R.drawable.blindinglights, "Jazz music",R.raw.jazzgirl));
-        arrayList3.add(new dataModel(13,R.drawable.jassimage, "Jazz music",R.raw.i_was_never_there));
-        arrayList3.add(new dataModel(14,R.drawable.blindinglights, "Jazz music",R.raw.jazzgirl));
-        arrayList3.add(new dataModel(15,R.drawable.jassimage, "Jazz music",R.raw.i_was_never_there));
-        arrayList3.add(new dataModel(16,R.drawable.blindinglights, "Jazz music",R.raw.jazzgirl));
-        arrayList3.add(new dataModel(17,R.drawable.jassimage, "Jazz music",R.raw.i_was_never_there));
-        recyclerView.setAdapter(new RecyclerViewAdapter(arrayList3));
+                            Intent intent=new Intent(getContext(),music_playing_Activity.class);
+                            intent.putExtra("songs",arrayList);
+                            intent.putExtra("music",songurl);
+                            intent.putExtra("image",image);
+                            intent.putExtra("pos",position);
+                            Objects.requireNonNull(getContext()).startActivity(intent);
+
+                        }
+
+                    }
+                });
+
+                recyclerView.setAdapter(recyclerViewAdapter2);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getContext(),"failed to access data",Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         return view;
-
     }
 }

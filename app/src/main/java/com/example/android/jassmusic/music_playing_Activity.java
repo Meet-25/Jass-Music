@@ -18,19 +18,23 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.slider.Slider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class music_playing_Activity extends AppCompatActivity {
 
     Slider slider;
-    ImageView skip_previous,play_arrow,skip_next,music_playing_image;
+    ImageView skip_previous,play_arrow,skip_next,music_playing_image,unlike;
     MediaPlayer mediaPlayer;
     ArrayList<dataModel> arrayList;
     int position;
     String music,image;
     int slider_height_default=0;
     CardView cardView;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class music_playing_Activity extends AppCompatActivity {
         skip_previous=findViewById(R.id.skip_previous);
         music_playing_image=findViewById(R.id.music_playing_image);
         cardView=findViewById(R.id.materialCardView);
+        unlike=findViewById(R.id.unlike);
 
         Intent intent=getIntent();
 //        Bundle bundle=intent.getExtras();
@@ -134,6 +139,14 @@ public class music_playing_Activity extends AppCompatActivity {
                 Uri uri=Uri.parse(arrayList.get(position).getSongurl());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
                 mediaPlayer.start();
+            }
+        });
+
+        unlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                unlike.setImageResource(R.drawable.baseline_like_24);
+
             }
         });
     }
