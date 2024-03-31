@@ -18,8 +18,13 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.slider.Slider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -29,12 +34,16 @@ public class music_playing_Activity extends AppCompatActivity {
     ImageView skip_previous,play_arrow,skip_next,music_playing_image,unlike;
     MediaPlayer mediaPlayer;
     ArrayList<dataModel> arrayList;
+    ArrayList<dataModel> arrayListBackup;
+
     int position;
     String music,image;
     int slider_height_default=0;
     CardView cardView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseUser firebaseUser;
+    Boolean like=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +87,52 @@ public class music_playing_Activity extends AppCompatActivity {
         Log.e("Music uri", "music uri: " + uri.toString());
         mediaPlayer = MediaPlayer.create(getApplicationContext(),uri);
         mediaPlayer.start();
+
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("user");
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    for (DataSnapshot childSnapshot : snapshot.getChildren()){
+                        String key=childSnapshot.getKey();
+                        DatabaseReference keyRef = childSnapshot.getRef();
+                        unlike.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                if (like==false){
+                                    unlike.setImageResource(R.drawable.baseline_unlike_24);
+                                    like=true;
+                                }else {
+                                    unlike.setImageResource(R.drawable.baseline_like_24);
+                                    like=false;
+                                }
+                                if (like==false){
+                                    dataModel dataModelobj=childSnapshot.getValue(dataModel.class);
+                                    Log.d("modelobj", "modelobj: " +dataModelobj );
+                                    arrayListBackup.add(dataModelobj);
+                                    Log.d("model", "model: " +arrayListBackup );
+
+                                }
+
+                            }
+                        });
+                        Log.d("Key", "Key: " + key);
+                        Log.d("Reference", "Reference: " + keyRef.toString());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+//        String key=databaseReference.getRef().getKey();
+//        databaseReference.child(key).child();
+        Log.e("db", "db: " + databaseReference);
+
 
 
         slider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
@@ -139,14 +194,6 @@ public class music_playing_Activity extends AppCompatActivity {
                 Uri uri=Uri.parse(arrayList.get(position).getSongurl());
                 mediaPlayer = MediaPlayer.create(getApplicationContext(), uri);
                 mediaPlayer.start();
-            }
-        });
-
-        unlike.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                unlike.setImageResource(R.drawable.baseline_like_24);
-
             }
         });
     }

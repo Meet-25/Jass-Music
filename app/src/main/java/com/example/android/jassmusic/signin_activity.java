@@ -87,7 +87,8 @@ public class signin_activity extends AppCompatActivity {
                                     usermodel usermodel1 = new usermodel(name,email,password);
                                     firebaseDatabase=FirebaseDatabase.getInstance();
                                     databaseReference=firebaseDatabase.getReference("user");
-                                    databaseReference.child(name).setValue(usermodel1);
+                                    String userID=databaseReference.push().getKey();
+                                    databaseReference.child(userID).setValue(usermodel1);
                                     Toast.makeText(signin_activity.this, "Authentication successful.",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
