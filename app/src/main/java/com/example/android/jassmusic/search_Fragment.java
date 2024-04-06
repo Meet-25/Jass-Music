@@ -76,24 +76,24 @@ public class search_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
         recyclerView.setLayoutManager(gridLayoutManager);
         arrayList = new ArrayList<>();
-//        arrayList.add(new dataModel(0,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(1,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(2,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(3,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(4,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(5,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(6,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(7,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(8,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(9,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(12,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(13,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(14,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(15,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(16,R.drawable.blindinglights, "Jazz Music2",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(17,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
-//        arrayList.add(new dataModel(18,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
-//        arrayList.add(new dataModel(19,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(0,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(1,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(2,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(3,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(4,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(5,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(6,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(7,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(8,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(9,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(12,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(13,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(14,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(15,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(16,R.drawable.blindinglights, "Jazz Music2",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(17,R.drawable.jassimage, "Jazz Music1",R.raw.summertime_sadness));
+        arrayList.add(new dataModel(18,R.drawable.blindinglights, "Jazz Music1",R.raw.i_was_never_there));
+        arrayList.add(new dataModel(19,R.drawable.jassimage, "Jazz Music2",R.raw.summertime_sadness));
 
         RecyclerViewAdapter2 recyclerViewAdapter2 = new RecyclerViewAdapter2(getContext(),arrayList, new CustomItemClickListener() {
             @Override

@@ -70,6 +70,18 @@ public class music_playing_Activity extends AppCompatActivity {
         Log.e("Music resource", "music position: " + arrayList.get(position));
         Log.e("Music uri", "music uri: " + music);
 
+        unlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                like=!like;
+                if (like==false) {
+                    unlike.setImageResource(R.drawable.baseline_unlike_24);
+                } else {
+                    unlike.setImageResource(R.drawable.baseline_like_24);
+                }
+            }
+        });
+
         String imageUrl = Uri.parse(image).toString();
 
 //        music_playing_image.setImageResource(Integer.parseInt(image));
@@ -91,6 +103,7 @@ public class music_playing_Activity extends AppCompatActivity {
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("user");
 
+        if (like==true){
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -98,37 +111,29 @@ public class music_playing_Activity extends AppCompatActivity {
                     for (DataSnapshot childSnapshot : snapshot.getChildren()){
                         String key=childSnapshot.getKey();
                         DatabaseReference keyRef = childSnapshot.getRef();
-                        unlike.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                if (like==false){
-                                    unlike.setImageResource(R.drawable.baseline_unlike_24);
-                                    like=true;
-                                }else {
-                                    unlike.setImageResource(R.drawable.baseline_like_24);
-                                    like=false;
-                                }
-                                if (like==false){
+
+
                                     dataModel dataModelobj=childSnapshot.getValue(dataModel.class);
-                                    Log.d("modelobj", "modelobj: " +dataModelobj );
                                     arrayListBackup.add(dataModelobj);
+                                    Log.d("modelobj", "modelobj: " +dataModelobj );
+//                                    arrayListBackup.add(dataModelobj);
                                     Log.d("model", "model: " +arrayListBackup );
 
-                                }
 
-                            }
-                        });
                         Log.d("Key", "Key: " + key);
                         Log.d("Reference", "Reference: " + keyRef.toString());
                     }
                 }
             }
 
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+        }
+
 //        String key=databaseReference.getRef().getKey();
 //        databaseReference.child(key).child();
         Log.e("db", "db: " + databaseReference);
